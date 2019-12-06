@@ -13,20 +13,13 @@ def read_input() -> dict:
         return orbits_map
 
 
-def calculate_orbits(orbits_map: dict, orbital_object: str, number_orbits: int) -> int:
-    return number_orbits if orbital_object == 'COM' else calculate_orbits(orbits_map, orbits_map[orbital_object], number_orbits + 1)
+def get_path_to_com(orbits_map: dict, orbital_object: str, path: list) -> list:
+    return path if orbital_object == 'COM' else get_path_to_com(orbits_map, orbits_map[orbital_object], path + [orbits_map[orbital_object]])
 
 
 def solution_part_one(orbits_map):
     orbital_objects = set(list(orbits_map.keys()) + list(orbits_map.values()))
-    return sum([calculate_orbits(orbits_map, orbital_object, 0) for orbital_object in orbital_objects])
-
-
-def get_path_to_com(orbits_map: dict, orbital_object: str, path: list) -> list:
-    if orbital_object == 'COM':
-        return path
-    else:
-        return get_path_to_com(orbits_map, orbits_map[orbital_object], path + [orbits_map[orbital_object]])
+    return sum([len(get_path_to_com(orbits_map, orbital_object, list())) for orbital_object in orbital_objects])
 
 
 def find_path_meeting_point(path1: list, path2: list) -> str:
