@@ -38,8 +38,8 @@ def get_coordinates_for_all_asteroids(row_maps: list):
     return coordinates
 
 
-def get_monitoring_station_info():
-    coordinates = get_coordinates_for_all_asteroids(get_list())
+def get_monitoring_station_info(input_list: list):
+    coordinates = get_coordinates_for_all_asteroids(input_list)
     result = dict()
     for current_coordinate in coordinates:
         angles = set()
@@ -50,8 +50,8 @@ def get_monitoring_station_info():
     return sorted(result.items(), key=lambda x: len(x[1]))[-1]
 
 
-def solution_part_one():
-    return len(get_monitoring_station_info()[1])
+def solution_part_one(input_list: list):
+    return len(get_monitoring_station_info(input_list)[1])
 
 
 def get_number_to_vaporize(informations: list, number: int):
@@ -72,9 +72,9 @@ def get_number_to_vaporize(informations: list, number: int):
     return sorted(all_to_vaporize, key=lambda x: x[3])[number - 1]
 
 
-def solution_part_two():
-    coordinates = get_coordinates_for_all_asteroids(get_list())
-    current_coordinate = get_monitoring_station_info()[0]
+def solution_part_two(input_list: list):
+    coordinates = get_coordinates_for_all_asteroids(input_list)
+    current_coordinate = get_monitoring_station_info(input_list)[0]
     information = list()
     for coordinate in coordinates:
         if current_coordinate != coordinate:
@@ -84,5 +84,6 @@ def solution_part_two():
     return coordinates_for_200th[0] * 100 + coordinates_for_200th[1]
 
 
-print('Solution for part one is: {}'.format(solution_part_one()))
-print('Solution for part two is: {}'.format(solution_part_two()))
+the_input = get_list()
+print('Solution for part one is: {}'.format(solution_part_one(the_input)))
+print('Solution for part two is: {}'.format(solution_part_two(the_input)))
