@@ -1,4 +1,13 @@
 import os
+from time import sleep
+
+
+def sleep_ms(ms):
+    sleep(ms / 1000)
+
+
+def clear_screen():
+    os.system('cls')
 
 
 def read_input(file_name: str) -> str:
